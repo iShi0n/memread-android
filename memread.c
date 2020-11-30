@@ -37,14 +37,18 @@ int main(int argc, char *argv[ ]){;
         lseek(fd_proc_mem, address, SEEK_SET);
         read(fd_proc_mem, buf, size);
         ptrace(PTRACE_DETACH, pid, NULL, NULL);
+        
         sprintf(&string, "%s", buf);
         printf("string: %s\n", buf);
         printf("hex: ");
+        
         for(int i=0; i<size; i++){
             printf("%#x ", buf[i]);
         }
+        
         printf("\n");
         printf("dec: %d\n", string);
+        
         close(fd_proc_mem);
         free(proc_mem);
         free(buf);
